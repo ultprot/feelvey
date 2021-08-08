@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller.v1;
 
 
 import com.example.demo.config.security.JwtTokenProvider;
@@ -7,15 +7,16 @@ import com.example.demo.service.UserService;
 import com.example.demo.web.dto.user.UserJoinRequestDto;
 import com.example.demo.web.dto.user.UserLoginRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class UserController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
@@ -40,7 +41,7 @@ public class UserController {
         UserLoginRequestDto userDto
     ) {
         User user = userService.findUserByEmail(userDto.getEmail());
-        userService.checkInputPasswordToSavedPassword(userDto.getPassword(), user.getPassword());
+        userService.compareInputPasswordToSavedPassword(userDto.getPassword(), user.getPassword());
 
         return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
     }

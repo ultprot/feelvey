@@ -20,11 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
-    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();

@@ -22,7 +22,7 @@ public class UserJoinRequestDto {
     private String email;
 
     @NotEmpty
-    @Min(8)
+    @Size(min = 8)
     private String password;
 
     public User toUser(){

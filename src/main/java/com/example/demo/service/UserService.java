@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -25,7 +23,7 @@ public class UserService {
             .orElseThrow(()->new IllegalArgumentException("가입되지 않은 이메일입니다."));
     }
 
-    public void checkInputPasswordToSavedPassword(String inputPassword, String savedPassword){
+    public void compareInputPasswordToSavedPassword(String inputPassword, String savedPassword){
         if(!passwordEncoder.matches(inputPassword, savedPassword)){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
