@@ -20,8 +20,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             ServletResponse response,
             FilterChain chain
     ) throws ServletException, IOException {
+        System.out.println("dfdjsklfjdsklfjdkslfjks아이고야");
         //헤더에서 JWT 받아오기
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
+        System.out.println(token);
 
         if(token != null && jwtTokenProvider.validateToken(token)){
             //토큰 유효한 경우 토큰으로부터 유저 정보 받아오기

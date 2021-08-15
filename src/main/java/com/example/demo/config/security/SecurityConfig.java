@@ -43,14 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http    //요청 권한 체크
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/**").permitAll();
+                .antMatchers("/user/**").hasRole("USER");
+
+        http
+                .authorizeRequests()
+                .antMatchers("/api/v1/login").permitAll()
+                .antMatchers("/api/v1/join").permitAll()
+                .anyRequest().authenticated();
 
         http    //csrf 사용하지 않음
-                .csrf()
-                .disable();
-
-        http    //csrf사용하지 않음
                 .csrf()
                 .disable();
 

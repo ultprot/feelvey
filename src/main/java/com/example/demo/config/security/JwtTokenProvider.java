@@ -61,14 +61,21 @@ public class JwtTokenProvider{
     }
 
     public String resolveToken(HttpServletRequest request){
-        return request.getHeader("X-AUTH-TOKEN");
+        if(request.getHeader("Authorization") != null){
+            return request.getHeader("Authorization").split(" ")[1];
+        }else {
+            return null;
+        }
+
     }
 
     public boolean validateToken(String token){
+        System.out.println(token);
         try{
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }

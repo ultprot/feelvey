@@ -7,10 +7,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.web.dto.user.UserJoinRequestDto;
 import com.example.demo.web.dto.user.UserLoginRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -44,5 +41,12 @@ public class UserController {
         userService.compareInputPasswordToSavedPassword(userDto.getPassword(), user.getPassword());
 
         return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
+    }
+
+    //로그인
+    @GetMapping("/validity")
+    public String validate(
+    ) {
+        return "ok";
     }
 }
